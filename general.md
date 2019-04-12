@@ -100,7 +100,21 @@ Can't assign permissions to users, only to roles
 
 # Accessing GCP
 
-## web shell
+## cloud shell
+
+- tiny ephemeral VM
+- CLI pre-installed
+    * gcloud: for working with Google Compute Engine and many GCP services
+    * gsutil: for working with Cloud Storage
+- SDK APIs pre-installed
+- 5Gb user data persists
+- kubectl: for working with Google Container Engine and Kubernetes
+- bq: for working with BigQuery
+- Language support for Java, Go, Python, Node.js, PHP, and Ruby
+- Web preview functionality
+- Built-in authorization for access to resources and instances
+
+> After 1 hour of inactivity, the Cloud Shell instance is recycled. Only the /home directory persists. Any changes made to the system configuration, including environment variables, are lost between sessions.
 
 ## Cloud SDK
 
@@ -130,6 +144,8 @@ Biq Query stuff
 
 - Cloud Client Libraries (community owned, hand-crafted client libraries)
 - Google API client libraries (OSS, generated, support various languages)
+- App APIs provide access to services, optimized for supported languages such as NodeJS and Python
+- Admin APIs offer functionality for resources mgmt.
 
 ## Cloud Console Mobile App
 

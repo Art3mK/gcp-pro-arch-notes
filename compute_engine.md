@@ -1,24 +1,3 @@
-# Networking
-
-- VPC networks have global scope, subnets can span the zones that make up a region.
-- you can have resources in different zones on the same subnet
-- you can dynamically increase the size of a subnet in a custom network by expanding the range of IP addresses allocated to it, without affecting already configured VMs.
-
-## VPC
-
-- built-in route tables
-- global distributed firewall
-- shared VPCs
-- VPC peering
-
-### VPNs and stuff
-
-![alt](./images/networking-interconnect.png)
-
-- cloud router (BGP) for VPN connections
-- direct peering with Google (shared DC in AWS terms?)
-- private dedicated interconnect (DC in AWS?)
-
 # Compute engine
 
 - custom VMs
@@ -32,7 +11,6 @@
 - standard
 - SSD
     - local SSDs
-
 
 # Instance groups
 
