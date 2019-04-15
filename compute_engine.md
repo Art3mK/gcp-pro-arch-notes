@@ -2,15 +2,27 @@
 
 - custom VMs
 
+## Machine types
+
+- high CPU/MEM
+- standard
+- shared-core
+
+---
+features:
+- vCPU == 1 hyperthreaded core
+- 2 vCPU == 1 physical core
+- network scales at 2 Gbit/s for each CPU core up to a max 16 GB/s (8 vCPUs)
+
 ## Preemptible VMs
 
 - per-hour price of preemptible VMs incorporates a substantial discount.
 
 ## Persistance storage
 
-- standard
-- SSD
-    - local SSDs
+- standard (up to 64 Tb per instance)
+- SSD (up to 64 Tb per instance)
+- local SSDs (max 3Tb per instance, 8 partitions x 375 Gb)
 
 # Instance groups
 
@@ -54,6 +66,8 @@
 ## Load balancing
 
 ![alt](./images/lbs.png)
+
+- no pre-warming required
 
 ### Network
 
