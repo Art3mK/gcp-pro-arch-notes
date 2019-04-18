@@ -1,6 +1,18 @@
 # Compute engine
 
-- custom VMs
+## Pricing
+
+- 1 minute minimum, per-second billing, sustained use discounts
+- preemtible instances (up to 80% discount)
+- custom machine types
+- recommendation engine
+- commited use discounts
+- usage of VMs of the same machine type in the same zone is combined as if they were one machine (inferred instances)
+- no charge for stopped VM (still chardeg for attached disks and IPs)
+
+## Lifecycle
+
+![alt](./images/vm_lifecycle.png)
 
 ## Machine types
 
@@ -16,13 +28,43 @@ features:
 
 ## Preemptible VMs
 
-- per-hour price of preemptible VMs incorporates a substantial discount.
+- Live at most 24 hours
+- no charge if terminated in the first 10 minutes
+- can be pre-empted with a 30-second notification via API
+- up to 80% discount
+- no live migrate, no auto restart
 
 ## Persistance storage
 
 - standard (up to 64 Tb per instance)
 - SSD (up to 64 Tb per instance)
 - local SSDs (max 3Tb per instance, 8 partitions x 375 Gb)
+- can be attached in read-only mode to multiple VMs
+- checksums built-in, automatic encryption
+
+![alt](./images/vm-disks.png)
+
+### Local SSD disks
+
+- not available on shared core
+- up to 8 local disks, 375Gb each == 3TB
+- data survives a reset, but not a VM stop or terminate (cannot be reattached to a different VM)
+- can use your own encryption keys
+
+### Snapshots
+
+- not available for local SSDs
+- incremental backup to cloud storage
+- snapshots can be restored to a new persistent disk
+
+## Availability policies
+
+- live migration (default)
+- terminate + automatic restart (default, could be disabled)
+
+## Images
+
+- premium images (p)
 
 # Instance groups
 

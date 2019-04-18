@@ -71,33 +71,6 @@ else { create one }
 - custom roles
     - only at project or organization level, not at folder level
 
-# IAM and admin
-
-Identities:
-- google accounts
-    - ppl personal accounts
-- service accounts
-    - named with email address, `project_id@appspot.gserviceaccount.com`, `project_number-compute@developer.gserviceacount.com`
-    - google manages keys for computer engine and app negine
-    - service account is also resource
-        - Alice can have an editor role in a service account and Bob can have the viewer role? WTF
-    - app accounts
-- google groups
-    - collection of ppl and service accounts
-- google app domains or cloud identity (example.com)
-    - virtual group of all the members in an organization
-
-**Who** _can do what_ `on which resources`
-
-## Permissions
-
-```
-<service>.<resource>.<verb>
-pubsub.subscriptions.consume
-```
-
-Can't assign permissions to users, only to roles
-
 # Accessing GCP
 
 ## cloud shell
