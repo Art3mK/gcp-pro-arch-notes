@@ -38,7 +38,7 @@
 - strong consistency
 - versioning (could be disabled/enabled)
 
-## Changing buckets properties
+### Changing buckets properties
 
 - multi-regional cannot be converted to regional, and vice versa
 
@@ -98,12 +98,16 @@ strong consistency for everything \o/
 
 Fully managed NoSQL, wide-column DB for terabyte apps
 
+- petabyte scale with very low latency
 - accessed using HBase API
 - native compatibility with big data, Hadoop ecosystems
 - in flight/at rest encryption
 - same DB used in maps/gmail/etc
 - single-row transactions
 - 10Mb/cell, 100Mb/row max size
+
+> The table is composed of rows, each of which typically describes a single entity, and columns, which contain individual values for each row.
+> Each row is indexed by a single row key and columns that are related to one another are typically grouped together into a column family.
 
 Data ingestion:
 - Application API
@@ -119,15 +123,31 @@ Features:
 - automatic replication and failover
 - vertical/horizontal scaling (via read replicas)
 
+Clients:
+- `gcloud beta sql`
+- App Engine, G Suite scripts
+- Applications and tools
+    - SQL workbench, toad
+    - external apps using standrad drivers
+
+2 generations:
+- 1st gen MySQL 5.5, max 16Gb RAM, 500Gb disk, IPv6, on-demand activation policy
+- 2nd gen, 7x throughpujt and 20x storage capacity of 1st gen, 208 Gb RAM, 10TB storage, MySQL  5.6/5.7, InnoDB only
+
+### Cloud SQL Proxy
+
+The Cloud SQL Proxy provides secure access to your Cloud SQL second generation instances without having to whitelist IP addresses or configure SSL. Cloud SQL Proxy works by having a local client called eth-proxy running the local environment.
 
 ## Cloud Spanner
 
 Cloud Spanner can scale to petabyte database sizes, while Cloud SQL is limited by the size of the database instances you choose.
 
 - strong transactional global consistency
+    - strongly consistent secondary indexes
 - schemas
 - automatic synchronous replication for HA
 - SQL queries ANSI 2011 with extensions
+    - ALTER statements for schema changes
 - 10G/row max size
 
 ![alt](./images/storage-options-compare.png)
