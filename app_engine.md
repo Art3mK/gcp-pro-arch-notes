@@ -1,8 +1,10 @@
 # App Engine ~ Beanstalk?
 
 ```
-App Engine will scale your application automatically in response to the amount of traffic it receives. That’s why App Engine is especially suited for applications where the workload is highly variable, like a web application.
+App Engine will scale your application automatically in response to the amount of traffic it receives. That’s why App Engine is especially suited for applications where the workload is highly variable, like a web application. Services are a modular abstraction in app engine, a way to break up the application into separate parts.
 ```
+
+![alt](./images/app-engine-services.png)
 
 One of compute options.
 

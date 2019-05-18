@@ -77,6 +77,54 @@ You can convert auto mode network to custom mode network, but "once custom, alwa
 - direct peering with Google (shared DC in AWS terms?)
 - private dedicated interconnect (DC in AWS?)
 
+#### Google Cloud VPN
+
+- site-to-site IPSec VPN
+- ESP in tunnel mode with auth
+- routing
+    - static
+    - dynamic (cloud router)
+- IKEv1/IKEv2 using a shared secret
+
+#### Cloud Router
+
+- provides BGP routing
+- graceful restart/ECMP
+- primary/backup tunnels for failover
+    - MED
+    - AS path length
+    - AS prepend
+
+#### Cloud interconnect (direct connect in AWS)
+
+- connect on-premise private networks with gcloud
+- cannot connect to public services via the same connection (LACP max 8x10Gbits/s connections, min 10Gbit/s)
+- connection is not encrypted, cloud VPN not available
+- CDN interconnect (?)
+- Cloud interconnect vs direct peering (?)
+
+#### External peering
+
+##### Direct peering
+
+- BGP peering between your AS in Google's via edge point of presense (PoP)
+- For all Google-bound traffic, not limited to GCP
+- /24 min prefixes
+- DP set up with Google NetOps Content Distribution (NCD) team (outside of GCP team)
+
+##### Carrier peering
+
+BGP peering is set up between service provider and google.
+
+##### External peering
+
+###### Shared VPC
+
+share GCP VPN networks across projects in cloud organization
+
+- VMs, VPNs, firewall rules in shared network spaces
+- two shared VPC networks could be peered
+
 ## Billing
 
 ![alt](./images/networking-billing.png)

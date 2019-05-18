@@ -56,6 +56,8 @@ features:
 - not available for local SSDs
 - incremental backup to cloud storage
 - snapshots can be restored to a new persistent disk
+- snapshots are global resources, could be use to create a boot disk in any region, in any network
+- egress charges applies if image is created in another region?
 
 ## Availability policies
 
@@ -64,7 +66,39 @@ features:
 
 ## Images
 
-- premium images (p)
+- custom images could be shared between projects
+- compute engine could import image from local vm/virtualbox/packer/another cloud
+- upload to cloud storage -> import to custom images
+- share betweeb projects using IAM roles: `--image-project` tag?
+- export to cloud storage bucket as tar file: `gcimagebundle`
+- image family point at latest version of an image
+
+## Metadata
+
+- project vs vm metadata
+- kv pairs, can contain directories, can return specific value for a key, all keys in a directory, on a recursive list of keys
+- http://metadata.google.internal/computeMetadata/v1
+- http://<ip-address>/computeMetadata/v1/
+- project: `gcloud compute project-info describe`
+- instance: `gcloud compute instances describe <instance>`
+- `wait_for_change`: `curl -H ""Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/tags?wait_for_change=true`
+- `timeout_sec` - returns if value changed after n seconds
+- ETags?
+
+### maintenance events
+
+- `/scheduling` directory
+- `maintenance-event` attribute
+- notifies when a maintenance event is about to occur
+- value changes 60 seconds before a transparent maintenance events starts
+- query periodically to trigger app code priot to a transparent maintenance event (backup/logging/save state)
+
+### metadata tags ?
+
+- boot: startup-script-url=%URL%
+- run:
+- maintenance:
+- shutdown: shutdown-script-url=%URL%
 
 # Instance groups
 
@@ -78,18 +112,27 @@ features:
 - managed groups
     - use template to define properties for every instance in the group
     - deployes identical instances based on **instance template**
-    - group can be resized
     - manager ensures all instances are in running state
     - typically used with an autoscaler
+    - can be single zone or regional
+        - regional groups supports autoscaling, NLB and HTTPS LBs
 - unmanaged groups
     - collection of instances not necessarily identical
+
+## Health Checks
+
+Supported protocols:
+- HTTP(S)
+- TCP
+- SSL (TLS)
 
 ## Autoscaling
 
 - in a managed instance group
 - reduce costs by shutting down extra instances
-- create one autoscaler per managedd instance group
+- create one autoscaler per managed instance group
 - autoscalers can be used with zone-based or regioanal managed instance groups
+- can't have conflicting rule sets
 
 ### policices
 
@@ -127,20 +170,57 @@ forwarding rules:
 - session affinity
 - auto scaling
 
-### HTTP
+### HTTP(S)
+
+![alt](./images/https-lb.png)
 
 - distributes traffic among groups of instances based on
     - proximity to the user
     - request URL
+- HTTP LB on ports 80/8080, HTTPS only 443
+- max 10 SSL certificates per target proxy
+- min TLS 1.0 is supported
 
 requires instance groups (managed/unmanaged)
 - session affinity
 - auto scaling
 - connection draining
 
+#### Session affinity
+
+GCLB cookie
+
+#### URL Maps
+
+URL Maps are called HOst and path rules in console
+
+#### Traffic allocation
+
+- nearest first with available capaciy
+- nect closest regoin with capacity
+- requests to a given region are distributed evenly across backend services
+
+![alt](./image/url-map.png)
+
+### NLBs
+
+- regional non-proxied LB
+- pass-through LB
+- UDP/TCP/SSL
+- only `httpHealthChecks`
+
+### Target pools
+
+- only with forwarding rules for TCP/UDP traffic
+- up to 50 target pools per project
+- only one health check per pool
+- VMs can be in different zones in the same region
+
 # TODO
 - create instance group with autoscaler
 - network/http load balancer
+- MIG autoscaling - do not use maxRate balancing mode in the backend service?
+- balancing modes
 
 # Links
 
