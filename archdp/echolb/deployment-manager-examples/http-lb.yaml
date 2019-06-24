@@ -1,10 +1,10 @@
 imports:
-  - path: instance.jinja
+  - path: http-lb-service.jinja
   - path: install-echo.sh
     name: startup-script
 resources:
-  - name: instance
-    type: instance.jinja
+  - name: echo
+    type: http-lb-service.jinja
     properties:
       zone: europe-north1-a
       tags:

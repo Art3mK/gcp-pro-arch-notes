@@ -38,6 +38,7 @@ You can convert auto mode network to custom mode network, but "once custom, alwa
 - `hostname.c.%project_id%.internal`
 - internal DNS resolver provided as part of compute engine (`169.254.169.254`, metadata server)
 - It is possible to have VMs with duplicate Internal IP addresses in the two networks
+- You can only reserve up to 200 static internal IP addresses per region by default.
 
 ### External IP
 
@@ -46,6 +47,11 @@ You can convert auto mode network to custom mode network, but "once custom, alwa
 - unknown to the OS of the VM
 - no public DNS by default
 - DNS zones can be hosted using Cloud DNS
+- global static external IP addresses
+    - you can use global IPs in DNS networks
+    - they are only available to global forwarding rules
+    - the global forwarding rules is used for global load balancing
+    - can't assign to a regional or zonal resource
 
 ### Alias IP ranges
 

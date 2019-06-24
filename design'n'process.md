@@ -34,7 +34,7 @@ Rough -> Structured desing (+iterate) -> Measurable
     - availability of a web page
     - how fast the system responds when a user clicks a button
     - directly observable and measurable by the users
-    - not an internla metric
+    - not an internal metric
     - not all statistics should be SLIs
     - represents the users' experience
     - reliably represent the health of the system
@@ -76,7 +76,7 @@ Not all services have an SLA, but all services should have an SLO.
     - what factors are importatnt to the size of the solution
     - dimensions/replication/rate of change
 
-## Business-logic layers
+## Business-logic layer
 
 ### Microservices arch
 
@@ -93,7 +93,7 @@ Independenlty developed services aid in:
 but:
 - unit testing is easier, integration testing is harder.
 ---
-- microservices kaes sense when there are many consumers of an atomic unit of functionality
+- microservices makes sense when there are many consumers of an atomic unit of functionality
 - doesn't make sense for one consumer of tightly-coupled functionality
 
 GCP options:
@@ -126,3 +126,32 @@ prefer small, stateless servers
 - easy to scale, no state to shard/rebalance
 - failure is cheap, no state to migrate/recover
 - easy to LB, no hot-spotting
+
+## Data layer design
+
+- data persistent mechanism
+    - database services
+    - storage services
+- data access layer
+
+### Classifying and characterizing data
+
+- data integrity
+
+**data transaction** properties (CAP), choose two:
+- consistency
+- availability
+- partition tolerance
+
+consistency + PT = ACID (atomicity, consistency, isolation, durability)
+availability + PT = BASE (basically available, soft state, eventual consistency)
+
+optimizing:
+- uptime
+- latency
+- scale
+- velocity
+    - how fast service will grow
+- privacy
+
+## Presentation layer

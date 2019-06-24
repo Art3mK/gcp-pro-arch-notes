@@ -7,7 +7,7 @@ resources:
     networkInterfaces:
       - network: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-d05ce078feaf9ac9/global/networks/default
         accessConfigs:
-        - name: Fuck you spilberg
+        - name: some randon name here
           type: ONE_TO_ONE_NAT
     disks:
       - deviceName: boot

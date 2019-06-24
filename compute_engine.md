@@ -152,6 +152,8 @@ Supported protocols:
 
 ![alt](./images/lbs.png)
 
+![alt](./images/load-balancing.png)
+
 - no pre-warming required
 
 ### Network

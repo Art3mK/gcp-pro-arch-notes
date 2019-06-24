@@ -85,14 +85,17 @@
 
 ### Consistency
 
-strong consistency for everything \o/
-
+strong:
 - read-after-write
 - read-after-metadata-update
 - read-after-delete
 - bucket listing
 - object listing
 - granting access to resources
+
+eventual:
+- revoking access (~1m)
+- enabling object versioninig in a bucket, wait ~30 sec before write/overwrite
 
 ## Cloud Big Table
 
@@ -114,7 +117,7 @@ Data ingestion:
 - Streaming: Spark/Dataflow streaming/Storm
 - Batch processing: Hadoop MapRecude, Dataflow, Spark
 
-## CLoud SQL / amanged RDBMS
+## CLoud SQL / managed RDBMS
 
 - MySQL
 - PostgreSQL
