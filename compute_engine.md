@@ -202,7 +202,7 @@ URL Maps are called HOst and path rules in console
 - nect closest regoin with capacity
 - requests to a given region are distributed evenly across backend services
 
-![alt](./image/url-map.png)
+![alt](./images/url-map.png)
 
 ### NLBs
 

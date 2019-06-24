@@ -45,7 +45,7 @@
 
 # IAM hierarchy
 
-![alt](./images/iam-hierarchy.png)
+![alt](./images/IAM-hierarchy.png)
 
 Identities:
 - google accounts
