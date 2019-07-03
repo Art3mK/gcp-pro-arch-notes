@@ -8,10 +8,12 @@
 - `gcloud config set compute/zone`
 - `gcloud compute instances move`
 - `gcloud compute images create web-v1 --family=webserver --source-disk=web-1 --source-disk-zone=us-central1-a`
+- `gcloud services enable cloudkms.googleapis.com`
 
 ## gsutil
 
 - `gsutil signurl -d 10m path/to/privatekey.p12 gs://bucket/object`
+- `gsutil ls -a gs://bucket`
 
 ## bq
 
