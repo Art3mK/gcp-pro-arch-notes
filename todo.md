@@ -1,6 +1,4 @@
-- BQ, partitioned tables
 - Transfer appliance, rehydration
-- Datastore indexes
 - global vs regional forwarding rules (global can't have target pool?l)
 - https://cloud.google.com/load-balancing/docs/network/
 - https://cloud.google.com/compute/docs/load-balancing/http/
@@ -8,3 +6,4 @@
 - https://cloud.google.com/deployment-manager/docs/
 - https://cloud.google.com/deployment-manager/docs/step-by-step-guide/using-multiple-templates
 - https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
+- bigtable vs bigquery

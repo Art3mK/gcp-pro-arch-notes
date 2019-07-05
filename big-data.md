@@ -24,6 +24,13 @@ It's Google's fully manage petabyte scale, low cost analytics data warehouse
 - separate billing for storing and processing data
     - shared data set, you will not be billed for other ppl queries
 - discount after storing data for 90 days
+- partitioned tables on date, clustering on column to colocate related data
+    - clustering is supported only on partitioned tables
+    - Maximum number of partitions per partitioned table: 4000
+    - Maximum number of partitions modified by a single job: 2000
+    - Maximum number of partition modifications per day per table: 5000
+    - Maximum rate of partition operations: 50 partition operations every 10 seconds
+
 
 ## Pub/Sub
 
