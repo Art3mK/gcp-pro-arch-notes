@@ -20,21 +20,6 @@ Cloud Dataproc is a fast, easy, managed way to run Hadoop, Spark, Hive, and Pig 
 - other ecosystem tools can be installed as well via initialization actions
 - 1s billing
 
-## Dataprep
-
-- intelligent data preparation
-- trifacta app on back
-- fully managed, serverless, web based
-- supported file types:
-    - input: csv, json (including nested), plain text, excel, log, tsv, avro
-    - ouput: csv, json, avro, bigquery table
-- `import -> transform -> run dataflow job on transformed dataset -> export results (GCS, BigQuery)`
-- IAM:
-    - dataprep user: run dataprep in a project
-    - dataprep service agent: gives trifecta access to project resources
-        - access to GSC buckets, dataflow developer, BigQuery user/data editor
-        - necessary for X-project access + GCE service account
-
 [Tips](https://cloud.google.com/blog/products/data-analytics/10-tips-for-building-long-running-clusters-using-cloud-dataproc):
 - Use Google Cloud Storage as your primary data source and sink
     - you can’t scale with HDFS because storage is still tied to compute
@@ -53,6 +38,21 @@ Cloud Dataproc is a fast, easy, managed way to run Hadoop, Spark, Hive, and Pig 
         - job roles
             - for developers
     - Kerberos
+
+## Dataprep
+
+- intelligent data preparation
+- trifacta app on back
+- fully managed, serverless, web based
+- supported file types:
+    - input: csv, json (including nested), plain text, excel, log, tsv, avro
+    - ouput: csv, json, avro, bigquery table
+- `import -> transform -> run dataflow job on transformed dataset -> export results (GCS, BigQuery)`
+- IAM:
+    - dataprep user: run dataprep in a project
+    - dataprep service agent: gives trifecta access to project resources
+        - access to GSC buckets, dataflow developer, BigQuery user/data editor
+        - necessary for X-project access + GCE service account
 
 ## Cloud dataflow
 
