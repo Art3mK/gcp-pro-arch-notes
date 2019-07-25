@@ -9,6 +9,13 @@
 - blob storage
 - encrypts data by default at rest and in transit
     - Customer-supplied encryption keys (CSEK)
+        - config in `.boto` file
+            ```
+            [GSUtil]
+            encryption_key = ...
+            decryption_key1 = ...
+            decryption_key2 = ...
+            ```
 - immutable objects
 - 4 storage classes
     - multi-regional (web site CDN, etc)
@@ -49,6 +56,9 @@
 - online transfer
 - storage transfer service
     - batch transfers from other region, other cloud providers, from HTTPS endpoints
+    - one-time transfer operations
+    - deleting existing objects in the dest bucket if they don't have a corresponding object in the source
+    - schedule **periodic sync** with advanced filters
 - transfer appliance (offline, like snowball)
 - offline media import (3rd party provider)
 
@@ -97,26 +107,6 @@ eventual:
 - revoking access (~1m)
 - enabling object versioninig in a bucket, wait ~30 sec before write/overwrite
 
-## Cloud Big Table
-
-Fully managed NoSQL, wide-column DB for terabyte apps
-
-- petabyte scale with very low latency
-- accessed using HBase API
-- native compatibility with big data, Hadoop ecosystems
-- in flight/at rest encryption
-- same DB used in maps/gmail/etc
-- single-row transactions
-- 10Mb/cell, 100Mb/row max size
-
-> The table is composed of rows, each of which typically describes a single entity, and columns, which contain individual values for each row.
-> Each row is indexed by a single row key and columns that are related to one another are typically grouped together into a column family.
-
-Data ingestion:
-- Application API
-- Streaming: Spark/Dataflow streaming/Storm
-- Batch processing: Hadoop MapRecude, Dataflow, Spark
-
 ## CLoud SQL / managed RDBMS
 
 - MySQL
@@ -124,7 +114,13 @@ Data ingestion:
 
 Features:
 - automatic replication and failover
+    - MySQL 2nd, semisync repl for failover, async for read replicas
 - vertical/horizontal scaling (via read replicas)
+
+Backups:
+- MySQL 1st gen instances: Storage of the most recent 7 backups is included in the cost of your instance
+- MySQL 2nd gen instances: The most recent 7 automated backups, and all on-demand backups, are retained.
+- PostgreSQL instances: The most recent 7 automated backups, and all on-demand backups, are retained
 
 Clients:
 - `gcloud beta sql`
@@ -134,12 +130,46 @@ Clients:
     - external apps using standrad drivers
 
 2 generations:
-- 1st gen MySQL 5.5, max 16Gb RAM, 500Gb disk, IPv6, on-demand activation policy
-- 2nd gen, 7x throughpujt and 20x storage capacity of 1st gen, 208 Gb RAM, 10TB storage, MySQL  5.6/5.7, InnoDB only
+- 1st gen MySQL 5.5, max 16Gb RAM, **500Gb disk**, IPv6, on-demand activation policy
+- 2nd gen, 7x throughpujt and 20x storage capacity of 1st gen, 208 Gb RAM, **10TB storage**, MySQL  5.6/5.7, InnoDB only
+
+Fixed limits:
+- connection limits
+    - MySQL 2nd gen
+        - db-f1-micro: 250
+        - db-g1-small: 1k
+        - All other machine types: 4k
+    - PG
+        - 25-1k
+- storage limits
+    - MySQL 1st gen: 250Gb (could be increased to 500Gb)
+    - 2nd gen: up to 30720 Gb
+    - PG: up to 30720 Gb
+
+### Failover
+
+- The failover replica must be in the same region as the primary instance, but in a different zone.
+- You can create only one failover replica for every primary instance.
+- You cannot change the failover replica's activation policy or maintenance window. Failover replicas have the same maintenance window as the primary instance.
+- You cannot enable backups on the failover replica. Backups must be performed on the primary instance.
+- You can create a failover replica only from the primary instance, not from read replicas.
+
+Fun:
+- In order to minimize the amount you are charged for instances on per-use billing plans, by default your instance becomes passive if it is not accessed for 15 minutes (1st gen)
+- Instances running MySQL 5.5 have the `innodb_file_per_table` flag set to **OFF** by default; InnoDB never shrinks its default tablespace
+- Cloud SQL does not support SUPER privileges, which means that GRANT ALL PRIVILEGES statements will not work
+- Per-use and package pricing options are applicable only for First Generation instances. As a rule of thumb, it is more economical to opt for the package plan if your instance is used for more than 450 hours each month. You can change the billing plan for your instance up to 3 times per month
+- RO on full disk, disk cloud be expanded on 2nd gen, but not on 1st?
+- PostgreSQL and MySQL Second Generation instances that are suspended for 90 days are deleted. This applies to instances with a state of `SUSPENDED`. Instances that are stopped, with a state of `RUNNABLE`, are not deleted.
 
 ### Cloud SQL Proxy
 
-The Cloud SQL Proxy provides secure access to your Cloud SQL second generation instances without having to whitelist IP addresses or configure SSL. Cloud SQL Proxy works by having a local client called eth-proxy running the local environment.
+The Cloud SQL Proxy provides secure access to your Cloud SQL second generation instances without having to whitelist IP addresses or configure SSL.
+Cloud SQL Proxy works by having a local client running the local environment.
+Your application communicates with the proxy with the standard database protocol used by your database.
+The proxy uses a secure tunnel to communicate with its companion process running on the server.
+
+![alt](./images/cloud-sql-proxy.png)
 
 ## Cloud Spanner
 

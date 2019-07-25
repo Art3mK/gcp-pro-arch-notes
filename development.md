@@ -13,11 +13,6 @@
     - pub/sub
     - HTTP call
 
-
-## Iaas Deployment manager
-
-- yaml or python
-
 ## Monitoring
 
 ### Stackdriver

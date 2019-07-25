@@ -52,25 +52,6 @@ if G Suite -> do not need to do anything
 else { create one }
 ```
 
-# Roles
-
-- primitive roles
-    - viewer
-    - editor
-        - deploy apps
-        - modify code
-        - configure services
-        - remove members
-    - owner
-        - CRUD on members
-        - delete projects
-        - permissions to set up billing administrator
-    - billing administrator
-- predefined roles, more fine grained role for specific roles
-    - instanceAdmin role for compute engine
-- custom roles
-    - only at project or organization level, not at folder level
-
 # Accessing GCP
 
 ## cloud shell
@@ -123,3 +104,19 @@ Biq Query stuff
 ## Cloud Console Mobile App
 
 - dashboards, etc
+
+## Transfer appliance
+
+the same thing as snowball
+
+-> cloud storage, bigQuery
+
+options:
+- 100 TB
+- 480 TB
+
+Before being stored on Transfer Appliance, all captured data is deduplicated, compressed and encrypted with an industry standard AES 256 algorithm using a password and passphrase that you specify. You must specify the same password and passphrase to rehydrate — unencrypt, uncompress, and reconstruct — your data once it is uploaded to Google Cloud Platform (GCP).
+
+To rehydrate your data, you run the Transfer Appliance Rehydrator application (VM on GCE) and specify a Cloud Storage destination bucket. Once all of your data is rehydrated to the destination bucket, run data integrity checks to make sure everything transferred completely and with no corruption.
+
+The Transfer Appliance Rehydrator compares the CRC32C hash value of each file being rehydrated with the hash value computed when the file was captured.

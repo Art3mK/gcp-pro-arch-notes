@@ -14,3 +14,4 @@
 - deploymnets can be updated - uses GCP API
     - add resources: default policy is acquire or create as needed
     - remove resources: default policy is ot delete the resource
+- https://github.com/GoogleCloudPlatform/deploymentmanager-samples.git

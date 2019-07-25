@@ -16,11 +16,28 @@
 
 - nested folders
 
-### Roles
+## Roles
 
-- admin
-- creator
-- viewer
+- primitive roles
+    - viewer
+    - editor
+        - deploy apps
+        - modify code
+        - configure services
+        - remove members
+    - owner
+        - CRUD on members
+        - delete projects
+        - permissions to set up billing administrator
+    - billing administrator
+- predefined roles, more fine grained role for specific roles (curated roles)
+    - group of permissions
+    - instanceAdmin role for compute engine
+- custom roles
+    - only at project or organization level, not at folder level
+- product-speficic roles
+    - compute network admin
+    - app engine deployer
 
 ## Projects roles
 
@@ -73,29 +90,6 @@ pubsub.subscriptions.consume
 Can't assign permissions to users, only to roles
 
 - child policies cannot restrict access granted at the parent level
-
-# Roles
-
-- primitive roles
-- curated roles
-- custom roles
-
-## Primitive roles
-
-- Owner
-- Editor
-- Viewer
-- Billing administrator
-
-## Curated roles
-
-Groups of permissions
-
-## Custom roles
-
-## Product-specific roles
-
-Compute network admin, App Engine Deployer, etc
 
 # Members
 

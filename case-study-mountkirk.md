@@ -13,7 +13,7 @@
 - two key environments
     - game backend on GCE
         - hardened linux distro
-        - NoSQL transactional DB *datastore/firestore*
+        - **NoSQL transactional** DB *datastore/firestore*
     - separate analytics setup
     - different storage device for each
 
@@ -48,22 +48,28 @@
 ### Requirements for Game Backend Platform
 
 - Dynamically scale up or down based on game activity.
-    - scaling
+    - autoscaling MIGs
+    - stackdriver to measure performance/efficieny
+        - drive autoscaling
 - Connect to a transactional database service to manage user profiles and game state.
-    - datastore/firestore
+    - datastore/firestore - noSQL transactional DB
 - Store game activity in a timeseries database service for future analysis.
     - store in BigQuery
     - BigQuery/Bigtable
+        - bigtable ms response time, BQ response measured in seconds, scale more efficiently
+        - no requirement for low latency analytics response time
 - As the system scales, ensure that data is not lost due to processing backlogs.
+    - LB, MIGs, pub/sub
 - Run hardened Linux distro.
+    - custom images in MIGs
 
 ### Requirements for Game Analytics Platform
 
 - Dynamically scale up or down based on game activity.
 - Process incoming data on the fly directly from the game servers.
-    - stream data to pub/sub -> dataflow -> warehours
+    - stream data to pub/sub -> dataflow -> warehouse
 - Process data that arrives late because of slow mobile networks.
-    - stream data to pub/sub -> dataflow -> warehours
+    - stream data to pub/sub -> dataflow -> warehouse
 - Allow queries to access at least 10 TB of historical data.
     - BigQuery
 - Process files that are regularly uploaded by users’ mobile devices.

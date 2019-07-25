@@ -136,17 +136,37 @@ Supported protocols:
 
 ### policices
 
+#### per-instance metrics
+
 - CPU
     - threshold for group avg CPU usage
 - http reqs per seconds/instances
     - LB specifies max req per seconds
 - stackdriver metrics
-    - gauge
-    - delta/min
-    - delta/second
+    - target types:
+        - `GAUGE`: The autoscaler computes the average value of the data collected in last couple minutes and compares that to the target utilization value of the autoscaler.
+        - `DELTA_PER_MINUTE`: The autoscaler calculates the average rate of growth per minute and compares that to the target utilization.
+        - `DELTA_PER_SECOND`: The autoscaler calculates the average rate of growth per second and compares that to the target utilization.
+    - when using instance specific metric -> can't scale to 0, as at least one instance must report metric.
+    - the metric must export data at least every 60 seconds
+    - the metric must export int64 or double data values.
 - multiple metrics options
     - up to 5 policies based on those three metric options
     - autoscaler selects policy with most amount of available servers
+
+#### per-group metrics
+
+Per-group metrics allow autoscaling with a standard or custom metric that does not export per-instance utilization data. Instead, the group scales based on a value that applies to the whole group and corresponds to how much work is available for the group or how busy the group is.
+
+```
+⚠️ Note: Regional managed instance groups do not support autoscaling using per-group metrics.
+```
+
+Instance provisioning relative to metric:
+- Instance assignment: Scale the size of MIGs based on the number of unacknowledged messages in a Google Pub/Sub subscription or a total QPS rate of a network endpoint.
+- Utilization target: Scale the size of MIGs based on a utilization target for a custom metric that does not come from the standard per-instance CPU or memory use metrics. For example, you might scale the group based on a custom latency metric.
+
+❗️ When you configure autoscaling with per-group metrics and you specify an instance assignment, your instance groups can scale down to 0 instances.
 
 ## Load balancing
 
@@ -217,12 +237,6 @@ URL Maps are called HOst and path rules in console
 - up to 50 target pools per project
 - only one health check per pool
 - VMs can be in different zones in the same region
-
-# TODO
-- create instance group with autoscaler
-- network/http load balancer
-- MIG autoscaling - do not use maxRate balancing mode in the backend service?
-- balancing modes
 
 # Links
 

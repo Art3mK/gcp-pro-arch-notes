@@ -54,11 +54,3 @@ No sandbox constraints, can connect to instances, uses compute engine VMs,
 - write access to ephemeral local disk
 
 ![std-vs-flex](./images/app-enginge-std-vs-flex.png)
-
-## Endpoints
-
-some API stuff - API gateway?
-
-## TODO
-
-- multiple apps in app engine?
