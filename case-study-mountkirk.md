@@ -24,7 +24,7 @@
 - reliable experience for users - no downtime
 - managed services
 - analytics - usage patterns
-- global footpring
+- global footprint
 
 ## Business reqs
 

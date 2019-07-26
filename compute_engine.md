@@ -69,7 +69,8 @@ features:
 - custom images could be shared between projects
 - compute engine could import image from local vm/virtualbox/packer/another cloud
 - upload to cloud storage -> import to custom images
-- share betweeb projects using IAM roles: `--image-project` tag?
+- share betweeb projects using IAM roles: `--image-project` tag
+    - `gcloud compute instances create test-instance --image database-image-a --image-project database-images`
 - export to cloud storage bucket as tar file: `gcimagebundle`
 - image family point at latest version of an image
 
@@ -219,7 +220,7 @@ URL Maps are called HOst and path rules in console
 #### Traffic allocation
 
 - nearest first with available capaciy
-- nect closest regoin with capacity
+- next closest regoin with capacity
 - requests to a given region are distributed evenly across backend services
 
 ![alt](./images/url-map.png)

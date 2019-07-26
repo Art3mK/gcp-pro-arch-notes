@@ -6,7 +6,7 @@ https://cloud.google.com/certification/guides/cloud-architect/casestudy-dress4wi
 
 - web-based wardrobe mgmt
 - social networking around fashion
-- monetizes vai ads
+- monetizes via ads
 
 ## pain points
 
@@ -20,7 +20,7 @@ https://cloud.google.com/certification/guides/cloud-architect/casestudy-dress4wi
     - migrate dev/test envs
     - build DR
         - think hybrid networks (GCP connect to on-premises)
-    - of successful will work toward full cloud migration
+    - if successful will work toward full cloud migration
 - need to map current env to GCP equivalents
 - prefer managed services
 
@@ -32,14 +32,14 @@ https://cloud.google.com/certification/guides/cloud-architect/casestudy-dress4wi
 - competitors
 - agility
     - quickly provision resources
-     -have room to innovate withou waiting on hardware
+     -have room to innovate without waiting on hardware
 - secure env
     - IAM, customer supplied encryption, firewall rules
-- global footprint not a priority - cloud be a future possibility
+- global footprint **not a priority** - cloud be a future possibility
 
 ## Business reqs
 
-- build a reliable and reproducibel env with scaled parity of production
+- build a reliable and reproducible env with scaled parity of production
     - without re-engineering exisiting apps
 - security
     - principle of least privilege
@@ -60,7 +60,7 @@ https://cloud.google.com/certification/guides/cloud-architect/casestudy-dress4wi
     - deployment manager
 - CI/CD
     - jenkins, spinnaker, cloud build
-- fialover to cloud
+- failover to cloud
     - replication
         - MySQL -> Cloud SQL
     - DNS cutover
